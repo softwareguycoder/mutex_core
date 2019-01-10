@@ -104,6 +104,8 @@ HMUTEX CreateMutex() {
 		return INVALID_HANDLE_VALUE;
 	}
 
+	log_info("CreateMutex: Mutex has been initialized successfully.");
+
 	log_debug("CreateMutex: Created mutex with handle at address %p.", pMutex);
 
 	log_info("CreateMutex: Done.");
