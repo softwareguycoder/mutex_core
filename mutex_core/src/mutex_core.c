@@ -1,7 +1,14 @@
-// Mutex API
+///////////////////////////////////////////////////////////////////////////////
+// mutex_core.c: Defines a standardized API for working with pthread mutex
+// objects
 
 #include "stdafx.h"
 #include "mutex_core.h"
+
+///////////////////////////////////////////////////////////////////////////////
+// FreeMutex: Internal function for freeing malloc'd mutex handles.  This
+// function is not exposed in the header file for this library, as it is
+// meant for internal use only.
 
 /**
  * @brief Internal (i.e., will not be put in the mutex.h header file) method
@@ -40,9 +47,17 @@ void FreeMutex(HMUTEX hMutex) {
 	log_info("FreeMutex: Done.");
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// CreateMutex: Creates a new mutex object using the pthread routines and then,
+// if successful, returns a HMUTEX handle to the newly-created mutex. The new
+// mutex also is initialized by the pthread_mutex_init routine.  malloc() is used
+// to allocate the memory for the new mutex.
+
 /**
  * @brief Creates a mutex object, and returns a handle to it.  Returns INVALID_HANDLE_VALUE
  if an error occurred.
+ * @remarks This function also initializes the new mutex handle with a call to
+ * pthread_mutex_init before it returns the HMUTEX handle.
  */
 HMUTEX CreateMutex() {
 	log_info("In CreateMutex");
@@ -96,6 +111,11 @@ HMUTEX CreateMutex() {
 	return (HMUTEX) pMutex;	// a HMUTEX is a typedef of pthread_mutex_t*
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// DestroyMutex: Releases the resources associated with the specified mutex
+// back to the operating system.  Attempts to call free() on the memory occupied
+// by the mutex as well.
+
 /**
  * @brief Releases resources associated with the specified mutex back to the operating system.
  * @remarks NOTE: For every call to CreateMutex, there must also be a call to DestroyMutex.
@@ -139,13 +159,19 @@ void DestroyMutex(HMUTEX hMutex) {
 	log_info("DestroyMutex: Done.");
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// LockMutex: Attempts to obtain a mutually-exclusive lock on the mutex with the
+// handle specified.  Does not return to the caller until either the lock has been
+// obtained or an error has occurred.
+
 /**
  * @brief Locks the mutex with the handle specified.  Does nothing if the handle
  * is INVALID_HANDLE_VALUE.
  * @param hMutex Handle of type HMUTEX (see stdafx.h) that refers to the mutex you want
  * to obtain a lock for.
+ * @returns TRUE (nonzero) if a lock was successfully obtained; FALSE (zero) if a problem occurred.
  */
-void LockMutex(HMUTEX hMutex) {
+BOOL LockMutex(HMUTEX hMutex) {
 	log_info("In LockMutex");
 
 	log_info("LockMutex: Checking whether the mutex handle passed is valid...");
@@ -156,7 +182,7 @@ void LockMutex(HMUTEX hMutex) {
 
 		log_info("LockMutex: Done.");
 
-		return;
+		return FALSE;
 	}
 
 	log_info(
@@ -169,21 +195,28 @@ void LockMutex(HMUTEX hMutex) {
 
 		log_info("LockMutex: Done.");
 
-		return;
+		return FALSE;
 	}
 
 	log_info("LockMutex: Obtained a lock on the mutex.");
 
 	log_info("LockMutex: Done.");
+
+	return TRUE; 	// Succeeded
 }
+
+///////////////////////////////////////////////////////////////////////////////
+// UnlockMutex: Attempts to release any existing mutually-exclusive lock which
+// may be being held by the current thread.
 
 /**
  * @brief Releases any existing locks on the mutex referred to by the handle specified. Does
  * nothing if the handle is INVALID_HANDLE_VALUE.
  * @param hMutex Mutex handle of type HMUTEX (see stdafx.h) that refers to the mutex you want
  * to release the lock on.
+ * @returns TRUE if we successfully released the lock; FALSE if a problem occurred.
  */
-void UnlockMutex(HMUTEX hMutex) {
+BOOL UnlockMutex(HMUTEX hMutex) {
 	log_info("In UnlockMutex");
 
 	log_info(
@@ -194,7 +227,7 @@ void UnlockMutex(HMUTEX hMutex) {
 
 		log_info("UnlockMutex: Done.");
 
-		return;
+		return FALSE;
 	}
 
 	log_info(
@@ -209,7 +242,7 @@ void UnlockMutex(HMUTEX hMutex) {
 
 		log_info("UnlockMutex: Done.");
 
-		return;
+		return FALSE;
 	}
 
 	log_info("UnlockMutex: Lock released successfully.");
@@ -217,5 +250,7 @@ void UnlockMutex(HMUTEX hMutex) {
 	// Done with execution.
 
 	log_info("UnlockMutex: Done.");
+
+	return TRUE; 	// Succeeded
 }
 
