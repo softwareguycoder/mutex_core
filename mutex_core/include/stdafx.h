@@ -14,4 +14,6 @@
 #define ERROR	-1		// Code to return to the operating system to indicate an error condition
 #endif // ERROR
 
+#include <../../debug_core/debug_core/include/debug_core.h>
+
 #endif /* __MUTEX_CORE_STDAFX_H__ */
