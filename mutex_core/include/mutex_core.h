@@ -11,6 +11,14 @@
 #include <unistd.h>  //Header file for sleep(). man 3 sleep for details.
 #include <pthread.h>
 
+#ifndef OK
+#define OK		0		// Code to return to the operating system to indicate successful program termination
+#endif // OK
+
+#ifndef ERROR
+#define ERROR	-1		// Code to return to the operating system to indicate an error condition
+#endif // ERROR
+
 #ifndef INVALID_HANDLE_VALUE
 #define INVALID_HANDLE_VALUE NULL
 #endif //INVALID_HANDLE_VALUE
