@@ -3,6 +3,7 @@
 	<name>mutex_core</name>
 	<comment></comment>
 	<projects>
+		<project>debug_core</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
