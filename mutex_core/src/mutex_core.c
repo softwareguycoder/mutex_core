@@ -15,7 +15,7 @@
  * for freeing malloc'd mutex handles.
  * @param hMutex The handle to be freed.
  */
-void FreeMutex(HMUTEX hMutex) {
+void _FreeMutex(HMUTEX hMutex) {
 	log_info("In FreeMutex");
 
 	log_info("FreeMutex: Checking whether the mutex handle passed is valid...");
@@ -93,7 +93,7 @@ HMUTEX CreateMutex() {
 
 		// Cleanup the mutex handle if necessary
 		if (pMutex != NULL) {
-			FreeMutex((HMUTEX) pMutex);
+			_FreeMutex((HMUTEX) pMutex);
 		}
 
 		log_info(
@@ -156,7 +156,11 @@ void DestroyMutex(HMUTEX hMutex) {
 	log_info(
 			"DestroyMutex: Resources for the mutex have been released back to the operating system.");
 
-	FreeMutex(hMutex);
+	log_info("DestroyMutex: Attempting to free the memory used by the mutex object...")
+
+	_FreeMutex(hMutex);
+
+	log_info("DestroyMutex: Memory occupied by the mutex object has been freed.")
 
 	log_info("DestroyMutex: Done.");
 }
