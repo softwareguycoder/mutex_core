@@ -23,7 +23,7 @@
 #define INVALID_HANDLE_VALUE NULL
 #endif //INVALID_HANDLE_VALUE
 
-// Handle to a mutex
+// Handle to a mutex -- really just a pointer to a pthread_mutex_t structure instance
 typedef pthread_mutex_t *HMUTEX;
 
 // API for mutex use
