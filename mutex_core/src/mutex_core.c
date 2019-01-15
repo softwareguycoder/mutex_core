@@ -16,22 +16,22 @@
  * @param hMutex The handle to be freed.
  */
 void _FreeMutex(HMUTEX hMutex) {
-	log_info("In FreeMutex");
+	log_info("In _FreeMutex");
 
-	log_info("FreeMutex: Checking whether the mutex handle passed is valid...");
+	log_info("_FreeMutex: Checking whether the mutex handle passed is valid...");
 
 	if (INVALID_HANDLE_VALUE == hMutex) {
 		log_warning(
-				"FreeMutex: The mutex handle passed has an invalid value; assuming it's already been deallocated.");
+				"_FreeMutex: The mutex handle passed has an invalid value; assuming it's already been deallocated.");
 
-		log_info("FreeMutex: Done.");
+		log_info("_FreeMutex: Done.");
 
 		// If we have an invalid handle (i.e., NULL pointer), then there is nothing to do.
 		return;
 	}
 
 	log_info(
-			"FreeMutex: The mutex handle passed is valid.  Freeing the memory...");
+			"_FreeMutex: The mutex handle passed is valid.  Freeing the memory...");
 
 	// The HMUTEX handle type is just a typedef of pthread_mutex_t*
 	// However, to work with the pthread functions, we need to view it
@@ -42,9 +42,9 @@ void _FreeMutex(HMUTEX hMutex) {
 	pMutex = NULL;
 	hMutex = INVALID_HANDLE_VALUE;
 
-	log_info("FreeMutex: The memory occupied by the mutex handle passed has been freed.");
+	log_info("_FreeMutex: The memory occupied by the mutex handle passed has been freed.");
 
-	log_info("FreeMutex: Done.");
+	log_info("_FreeMutex: Done.");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
