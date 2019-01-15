@@ -42,7 +42,7 @@ void _FreeMutex(HMUTEX hMutex) {
 	pMutex = NULL;
 	hMutex = INVALID_HANDLE_VALUE;
 
-	log_info("FreeMutex: The mutex handle passed has been freed.");
+	log_info("FreeMutex: The memory occupied by the mutex handle passed has been freed.");
 
 	log_info("FreeMutex: Done.");
 }
