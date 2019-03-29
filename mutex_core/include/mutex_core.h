@@ -11,8 +11,7 @@
 #include <unistd.h>  //Header file for sleep(). man 3 sleep for details.
 #include <pthread.h>
 
-// Forward declaration of BOOL data type
-typedef enum BOOL;
+#include <../../common_core/common_core/include/common_core.h>
 
 #ifndef OK
 #define OK		0		// Code to return to the operating system to indicate successful program termination

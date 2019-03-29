@@ -14,9 +14,6 @@
 #define ERROR	-1		// Code to return to the operating system to indicate an error condition
 #endif // ERROR
 
-// Boolean "data type"
-typedef enum {
-	FALSE, TRUE
-} BOOL;
+#include <../../common_core/common_core/include/common_core.h>
 
 #endif /* __MUTEX_CORE_STDAFX_H__ */
