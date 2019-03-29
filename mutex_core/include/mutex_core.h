@@ -26,11 +26,6 @@
 // Handle to a mutex -- really just a pointer to a pthread_mutex_t structure instance
 typedef pthread_mutex_t *HMUTEX;
 
-// Boolean "data type"
-typedef enum {
-	FALSE, TRUE
-} BOOL;
-
 // API for mutex use
 
 /**
