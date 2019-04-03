@@ -86,6 +86,7 @@ void DestroyMutex(HMUTEX hMutex) {
 	}
 
 	_FreeMutex(hMutex);
+	hMutex = INVALID_HANDLE_VALUE;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
