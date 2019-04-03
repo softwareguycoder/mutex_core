@@ -72,7 +72,8 @@ HMUTEX CreateMutex() {
 
 /**
  * @brief Releases resources associated with the specified mutex back to the operating system.
- * @remarks NOTE: For every call to CreateMutex, there must also be a call to DestroyMutex.
+ * @remarks NOTE: For every call to CreateMutex, there must also be a call to DestroyMutex. When
+ * this function returns, hMutex will be INVALID_HANDLE_VALUE.
  */
 void DestroyMutex(HMUTEX hMutex) {
 	if (INVALID_HANDLE_VALUE == hMutex) {
