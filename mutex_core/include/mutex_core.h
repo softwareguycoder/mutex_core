@@ -8,18 +8,7 @@
 #ifndef __MUTEX_CORE_H__
 #define __MUTEX_CORE_H__
 
-#include <unistd.h>  //Header file for sleep(). man 3 sleep for details.
-#include <pthread.h>
-
-#include <../../common_core/common_core/include/common_core.h>
-
-#ifndef OK
-#define OK		0		// Code to return to the operating system to indicate successful program termination
-#endif // OK
-
-#ifndef ERROR
-#define ERROR	-1		// Code to return to the operating system to indicate an error condition
-#endif // ERROR
+#include "stdafx.h"
 
 #ifndef INVALID_HANDLE_VALUE
 #define INVALID_HANDLE_VALUE NULL
