@@ -17,7 +17,8 @@
  */
 void _FreeMutex(HMUTEX hMutex) {
 	if (INVALID_HANDLE_VALUE == hMutex) {
-		// If we have an invalid handle (i.e., NULL pointer), then there is nothing to do.
+		// If we have an invalid handle (i.e., NULL pointer), then there is
+		// nothing to do.
 		return;
 	}
 
@@ -34,11 +35,12 @@ void _FreeMutex(HMUTEX hMutex) {
 ///////////////////////////////////////////////////////////////////////////////
 // CreateMutex: Creates a new mutex object using the pthread routines and then,
 // if successful, returns a HMUTEX handle to the newly-created mutex. The new
-// mutex also is initialized by the pthread_mutex_init routine.  malloc() is used
-// to allocate the memory for the new mutex.
+// mutex also is initialized by the pthread_mutex_init routine.  malloc()
+// is used to allocate the memory for the new mutex.
 
 /**
- * @brief Creates a mutex object, and returns a handle to it.  Returns INVALID_HANDLE_VALUE
+ * @brief Creates a mutex object, and returns a handle to it.
+ * Returns INVALID_HANDLE_VALUE
  if an error occurred.
  * @remarks This function also initializes the new mutex handle with a call to
  * pthread_mutex_init before it returns the HMUTEX handle.
@@ -71,13 +73,16 @@ HMUTEX CreateMutex() {
 // by the mutex as well.
 
 /**
- * @brief Releases resources associated with the specified mutex back to the operating system.
- * @remarks NOTE: For every call to CreateMutex, there must also be a call to DestroyMutex. When
+ * @brief Releases resources associated with the specified mutex back
+ * to the operating system.
+ * @remarks NOTE: For every call to CreateMutex, there must also be a call to
+ * DestroyMutex. When
  * this function returns, hMutex will be INVALID_HANDLE_VALUE.
  */
 void DestroyMutex(HMUTEX hMutex) {
 	if (INVALID_HANDLE_VALUE == hMutex) {
-		// If we have an invalid handle (i.e., NULL pointer), then there is nothing to do.
+		// If we have an invalid handle (i.e., NULL pointer), then there
+		// is nothing to do.
 		return;
 	}
 
@@ -91,16 +96,17 @@ void DestroyMutex(HMUTEX hMutex) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// LockMutex: Attempts to obtain a mutually-exclusive lock on the mutex with the
-// handle specified.  Does not return to the caller until either the lock has been
-// obtained or an error has occurred.
+// LockMutex: Attempts to obtain a mutually-exclusive lock on the mutex with
+// the handle specified.  Does not return to the caller until either the lock
+// has been obtained or an error has occurred.
 
 /**
- * @brief Locks the mutex with the handle specified.  Does nothing if the handle
- * is INVALID_HANDLE_VALUE.
- * @param hMutex Handle of type HMUTEX (see stdafx.h) that refers to the mutex you want
- * to obtain a lock for.
- * @returns TRUE (nonzero) if a lock was successfully obtained; FALSE (zero) if a problem occurred.
+ * @brief Locks the mutex with the handle specified.  Does nothing if the
+ * handle is INVALID_HANDLE_VALUE.
+ * @param hMutex Handle of type HMUTEX (see stdafx.h) that refers to the
+ * mutex you want to obtain a lock for.
+ * @returns TRUE (nonzero) if a lock was successfully obtained; FALSE
+ * (zero) if a problem occurred.
  */
 BOOL LockMutex(HMUTEX hMutex) {
 	if (hMutex == INVALID_HANDLE_VALUE) {
@@ -119,18 +125,20 @@ BOOL LockMutex(HMUTEX hMutex) {
 // may be being held by the current thread.
 
 /**
- * @brief Releases any existing locks on the mutex referred to by the handle specified. Does
- * nothing if the handle is INVALID_HANDLE_VALUE.
- * @param hMutex Mutex handle of type HMUTEX (see stdafx.h) that refers to the mutex you want
- * to release the lock on.
- * @returns TRUE if we successfully released the lock; FALSE if a problem occurred.
+ * @brief Releases any existing locks on the mutex referred to by the handle
+ * specified. Does nothing if the handle is INVALID_HANDLE_VALUE.
+ * @param hMutex Mutex handle of type HMUTEX (see stdafx.h) that refers to the
+ * mutex you want to release the lock on.
+ * @returns TRUE if we successfully released the lock; FALSE if a problem
+ * occurred.
  */
 BOOL UnlockMutex(HMUTEX hMutex) {
 	if (hMutex == INVALID_HANDLE_VALUE) {
 		return FALSE;
 	}
 
-	// Attempt to unlock the mutex provided and report to the user if the attempt does not work.
+	// Attempt to unlock the mutex provided and report to the user if the
+	// attempt does not work.
 
 	int nResult = pthread_mutex_unlock((pthread_mutex_t*) hMutex);
 	if (OK != nResult) {
