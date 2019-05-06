@@ -9,6 +9,7 @@
 #define __MUTEX_CORE_H__
 
 #include "stdafx.h"
+#include "interlocked_operations.h"
 
 #ifndef INVALID_HANDLE_VALUE
 #define INVALID_HANDLE_VALUE NULL
