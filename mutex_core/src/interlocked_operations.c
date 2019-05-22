@@ -23,6 +23,7 @@ void DestroyInterlock() {
 	}
 
 	DestroyMutex(g_hInterlockMutex);
+	g_hInterlockMutex = INVALID_HANDLE_VALUE;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

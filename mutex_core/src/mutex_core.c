@@ -91,7 +91,7 @@ void DestroyMutex(HMUTEX hMutex) {
 		return;
 	}
 
-	_FreeMutex(hMutex);
+	FreeBuffer((void**)&hMutex);
 	hMutex = INVALID_HANDLE_VALUE;
 }
 
